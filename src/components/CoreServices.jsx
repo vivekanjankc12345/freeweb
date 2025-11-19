@@ -1,238 +1,288 @@
 "use client";
-import { useState, useRef } from "react";
-import { Check, Monitor, Server, Code, Lightbulb, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
 
-const services = [
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Brain, ChartSpline, Layers3, ShieldCheck, Sparkles, Workflow } from "lucide-react";
+
+const serviceTracks = [
   {
-    icon: Monitor,
-    title: "Digital Marketing",
-    description: "Comprehensive marketing strategies to boost your online presence and drive conversions.",
-    features: [
-      "SEO Optimization",
-      "Social Media Marketing",
-      "Content Strategy",
-      "PPC Campaigns"
-    ]
+    id: "strategy",
+    title: "Intelligence Strategy Pods",
+    tagline: "Zero-to-one clarity in ten days.",
+    description:
+      "Cross-functional pods blend growth science, AI research, and experience strategy to design a validated roadmap before a single feature ships.",
+    icon: Brain,
+    gradient: "from-pink-500/20 via-orange-500/10 to-transparent",
+    metrics: [
+      { label: "Launch cadence", value: "14 days" },
+      { label: "Signals wired", value: "48+" },
+      { label: "Stakeholders aligned", value: "5 teams" },
+    ],
+    deliverables: [
+      "North-star narrative",
+      "Opportunity model",
+      "AI capability map",
+      "Activation backlog",
+    ],
   },
   {
-    icon: Server,
-    title: "IT Solutions",
-    description: "Cutting-edge technology solutions to streamline your business operations.",
-    features: [
-      "Cloud Infrastructure",
-      "Cybersecurity",
-      "System Integration",
-      "Technical Support"
-    ]
+    id: "automation",
+    title: "Automation Fabric",
+    tagline: "Humans stay on strategy, bots own the busywork.",
+    description:
+      "Composable automation layers orchestrate marketing, operations, and support with live guardrails, so experiments move from idea to impact instantly.",
+    icon: Workflow,
+    gradient: "from-violet-500/20 via-pink-500/15 to-transparent",
+    metrics: [
+      { label: "Playbooks deployed", value: "32" },
+      { label: "Manual effort cut", value: "63%" },
+      { label: "Coverage", value: "24/7" },
+    ],
+    deliverables: [
+      "Runbook library",
+      "AI-assisted QA layer",
+      "Compliance matrix",
+      "Ops command center",
+    ],
   },
   {
-    icon: Code,
-    title: "Web Development",
-    description: "Custom websites and applications built for performance and user experience.",
-    features: [
-      "Responsive Design",
-      "E-commerce Solutions",
-      "Mobile Apps",
-      "API Development"
-    ]
+    id: "experiences",
+    title: "Adaptive Experience Stack",
+    tagline: "Interfaces that reshape themselves around every visitor.",
+    description:
+      "Headless experiences plug into your data graph to personalize content, pricing, and journeys in real time across web, product, and retail endpoints.",
+    icon: Layers3,
+    gradient: "from-sky-500/20 via-purple-500/10 to-transparent",
+    metrics: [
+      { label: "Lift in CVR", value: "+312%" },
+      { label: "Markets live", value: "18" },
+      { label: "Latency target", value: "180ms" },
+    ],
+    deliverables: [
+      "Experience OS",
+      "Realtime experimentation suite",
+      "Audience intelligence layer",
+      "Motion language pack",
+    ],
+  },
+];
+
+const deliveryMoments = [
+  {
+    title: "Signal Mapping",
+    detail: "Interview loops + telemetry ingestion to surface leverage points.",
+    meta: "Days 1-3",
   },
   {
-    icon: Lightbulb,
-    title: "Business Consulting",
-    description: "Strategic guidance to help you make informed decisions and grow your business.",
-    features: [
-      "Digital Transformation",
-      "Process Optimization",
-      "Growth Strategy",
-      "Market Analysis"
-    ]
+    title: "Systems Design",
+    detail: "Blueprint automation, data contracts, and experience ladders.",
+    meta: "Days 4-7",
   },
   {
-    icon: Monitor,
-    title: "Brand Strategy",
-    description: "Build a powerful brand identity that resonates with your target audience.",
-    features: [
-      "Brand Identity Design",
-      "Market Positioning",
-      "Visual Guidelines",
-      "Brand Messaging"
-    ]
+    title: "Live Simulation",
+    detail: "Prototype journeys in the command canvas with real data stubs.",
+    meta: "Days 8-10",
   },
   {
-    icon: Server,
-    title: "Data Analytics",
-    description: "Transform your data into actionable insights for better decision making.",
-    features: [
-      "Business Intelligence",
-      "Predictive Analytics",
-      "Custom Reports",
-      "Data Visualization"
-    ]
-  }
+    title: "Deployment Sprint",
+    detail: "Ship, measure, and train internal teams through paired enablement.",
+    meta: "Days 11-14",
+  },
+];
+
+const techStack = [
+  { label: "AI copilots", value: ["OpenAI GPT-4.1", "Anthropic Claude", "Vertex AI"] },
+  { label: "Automation", value: ["n8n", "Make.com", "Temporal"] },
+  { label: "Experience", value: ["Next.js", "Framer Motion", "Contentful"] },
+  { label: "Intelligence", value: ["dbt", "Snowflake", "Amplitude"] },
 ];
 
 export default function CoreServices() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const sliderRef = useRef(null);
-  const router = useRouter();
-
-  const itemsPerView = {
-    mobile: 1,
-    tablet: 2,
-    desktop: 4
-  };
-
-  const scroll = (direction) => {
-    const container = sliderRef.current;
-    if (!container) return;
-
-    const scrollAmount = container.offsetWidth / itemsPerView.desktop;
-    const newScroll = direction === 'left' 
-      ? container.scrollLeft - scrollAmount 
-      : container.scrollLeft + scrollAmount;
-
-    container.scrollTo({
-      left: newScroll,
-      behavior: 'smooth'
-    });
-  };
-
-  const handleScroll = () => {
-    const container = sliderRef.current;
-    if (!container) return;
-    
-    const index = Math.round(container.scrollLeft / (container.offsetWidth / itemsPerView.desktop));
-    setCurrentIndex(index);
-  };
+  const [activeTrack, setActiveTrack] = useState(serviceTracks[0]);
 
   return (
-    <div className="w-full py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white">
-      <div className="max-w-[1400px] mx-auto px-4">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-            Our Core Services
-          </h2>
-          <p className="text-gray-600 text-base md:text-lg">
-            We provide comprehensive marketing and IT solutions tailored for creators,
-            entrepreneurs, and growing businesses worldwide.
-          </p>
+    <section className="relative overflow-hidden bg-[var(--background)] px-6 py-24">
+      <div className="absolute inset-0 opacity-60">
+        <div className="grid-blur absolute inset-0" />
+        <div className="absolute -top-20 right-10 h-72 w-72 rounded-full bg-pink-500/20 blur-[120px]" />
+        <div className="absolute bottom-0 left-6 h-[420px] w-[420px] rounded-full bg-purple-500/20 blur-[140px]" />
+      </div>
+
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-12">
+        <div className="space-y-6 text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.4em] text-white/70"
+          >
+            <Sparkles className="h-4 w-4 text-pink-300" />
+            CORE SYSTEMS
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl font-semibold leading-tight md:text-5xl"
+          >
+            AI-native studios building{" "}
+            <span className="bg-gradient-to-r from-pink-400 via-amber-300 to-purple-500 bg-clip-text text-transparent">
+              living
+            </span>{" "}
+            products.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-3xl text-lg text-white/70"
+          >
+            Every engagement is a choreographed system: strategy pods surface leverage, automation fabric keeps work
+            humming, and adaptive experiences turn launches into rituals.
+          </motion.p>
         </div>
 
-        {/* Slider Container */}
-        <div className="relative mb-12">
-          {/* Navigation Buttons */}
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white hover:bg-pink-600 text-black hover:text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hidden md:flex"
-            aria-label="Previous"
+        <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-[28px] border border-white/10 bg-white/5 p-4 backdrop-blur"
           >
-            <ChevronLeft size={24} />
-          </button>
-
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white hover:bg-pink-600 text-black hover:text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hidden md:flex"
-            aria-label="Next"
-          >
-            <ChevronRight size={24} />
-          </button>
-
-          {/* Service Cards Slider */}
-          <div
-            ref={sliderRef}
-            onScroll={handleScroll}
-            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory hide-scrollbar pb-4"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-            }}
-          >
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={index}
-                  className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] snap-start"
-                >
-                  <div className="bg-white rounded-2xl p-6 md:p-7 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
-                    {/* Icon */}
-                    <div className="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-5">
-                      <Icon className="text-pink-600" size={28} />
+            <div className="rounded-2xl border border-white/5 bg-black/30 p-4 text-left">
+              <p className="text-sm uppercase tracking-[0.4em] text-white/40">Select track</p>
+              <h3 className="mt-2 text-2xl font-semibold text-white">Service blueprints</h3>
+            </div>
+            <div className="mt-4 flex flex-col gap-3">
+              {serviceTracks.map((track) => {
+                const Icon = track.icon;
+                const isActive = activeTrack.id === track.id;
+                return (
+                  <button
+                    key={track.id}
+                    onClick={() => setActiveTrack(track)}
+                    className={`relative flex w-full flex-col gap-2 rounded-2xl border px-4 py-4 text-left transition ${
+                      isActive
+                        ? "border-white/30 bg-gradient-to-r from-white/10 to-transparent"
+                        : "border-white/5 bg-white/5 hover:border-white/20"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                        <Icon className="h-5 w-5 text-pink-200" />
+                      </span>
+                      <div>
+                        <p className="text-sm uppercase tracking-[0.2em] text-white/50">{track.tagline}</p>
+                        <p className="text-lg font-semibold text-white">{track.title}</p>
+                      </div>
                     </div>
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-black mb-3">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-gray-600 mb-5 leading-relaxed text-sm flex-grow">
-                      {service.description}
-                    </p>
-
-                    {/* Features List */}
-                    <ul className="space-y-2.5 mb-5">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2.5">
-                          <Check className="text-pink-600 flex-shrink-0 mt-0.5" size={16} />
-                          <span className="text-gray-700 text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Learn More Button */}
-                    <button className="w-full py-3 px-6 border-2 border-pink-600 text-pink-600 font-semibold rounded-xl hover:bg-pink-600 hover:text-white transition-all duration-300 mt-auto">
-                      Learn More
+          <div className="space-y-8">
+            <AnimatePresence mode="wait">
+              <motion.article
+                key={activeTrack.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35 }}
+                className="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-white/5 via-black/10 to-white/0 p-8 backdrop-blur"
+              >
+                <div className="pointer-events-none absolute inset-0 rounded-[32px] border border-white/5 opacity-40" />
+                <div className="flex flex-col gap-6">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.4em] text-white/60">How it feels</p>
+                    <h3 className="mt-3 text-3xl font-semibold text-white">{activeTrack.title}</h3>
+                    <p className="mt-3 text-white/70">{activeTrack.description}</p>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    {activeTrack.metrics.map((metric) => (
+                      <div
+                        key={metric.label}
+                        className="rounded-2xl border border-white/10 bg-black/30 px-4 py-5 text-center"
+                      >
+                        <p className="text-2xl font-semibold text-white">{metric.value}</p>
+                        <p className="text-xs uppercase tracking-[0.4em] text-white/40">{metric.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {activeTrack.deliverables.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <button className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-3 text-sm font-semibold shadow-[0_15px_45px_rgba(255,45,133,0.35)] transition hover:translate-y-[-2px]">
+                      Launch this pod
+                      <ArrowUpRight className="h-4 w-4" />
+                    </button>
+                    <button className="rounded-2xl border border-white/20 px-5 py-3 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white">
+                      Download blueprint
                     </button>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+                <div
+                  className={`pointer-events-none absolute -top-32 right-0 h-64 w-64 rounded-full bg-gradient-to-br ${activeTrack.gradient} blur-[120px]`}
+                />
+              </motion.article>
+            </AnimatePresence>
 
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-6">
-            {Array.from({ length: Math.ceil(services.length / itemsPerView.desktop) }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  const container = sliderRef.current;
-                  if (container) {
-                    const scrollAmount = (container.offsetWidth / itemsPerView.desktop) * index * itemsPerView.desktop;
-                    container.scrollTo({
-                      left: scrollAmount,
-                      behavior: 'smooth'
-                    });
-                  }
-                }}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  Math.floor(currentIndex / itemsPerView.desktop) === index
-                    ? 'bg-pink-600 w-8'
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="rounded-[28px] border border-white/10 bg-white/5 p-8 backdrop-blur"
+            >
+              <div className="flex items-center gap-3">
+                <ChartSpline className="h-5 w-5 text-pink-300" />
+                <p className="text-sm uppercase tracking-[0.4em] text-white/50">14-day choreography</p>
+              </div>
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
+                {deliveryMoments.map((moment, index) => (
+                  <div key={moment.title} className="relative rounded-2xl border border-white/10 bg-black/30 p-5">
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs uppercase tracking-[0.4em] text-white/30">{moment.meta}</p>
+                      <span className="text-white/40">{index + 1}/4</span>
+                    </div>
+                    <h4 className="mt-2 text-xl font-semibold text-white">{moment.title}</h4>
+                    <p className="mt-2 text-sm text-white/70">{moment.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
-        {/* View All Services Button */}
-        <div className="text-center">
-          <button
-          onClick={() => router.push("/services")}
-           className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-pink-300 hover:shadow-xl transition-all duration-300">
-            View All Services
-          </button>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="rounded-[28px] border border-white/10 bg-gradient-to-r from-white/5 to-transparent p-8 backdrop-blur"
+            >
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="h-5 w-5 text-emerald-300" />
+                <p className="text-sm uppercase tracking-[0.4em] text-white/50">Reference stack</p>
+              </div>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {techStack.map((stack) => (
+                  <div key={stack.label} className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                    <p className="text-xs uppercase tracking-[0.4em] text-white/30">{stack.label}</p>
+                    <p className="mt-2 text-white">{stack.value.join(" • ")}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-    </div>
+    </section>
   );
 }
+

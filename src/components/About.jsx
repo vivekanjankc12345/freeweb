@@ -1,122 +1,156 @@
-"useclient";
-import React from 'react';
-import { Award, Headphones, TrendingUp, ArrowRight } from 'lucide-react';
+"use client";
 
-const About = () => {
-  const features = [
-    {
-      icon: Award,
-      title: "Proven Expertise",
-      description: "Years of experience helping businesses across America, Europe, Middle East, and India."
-    },
-    {
-      icon: Headphones,
-      title: "Dedicated Support",
-      description: "Personal attention and ongoing support to ensure your success."
-    },
-    {
-      icon: TrendingUp,
-      title: "Measurable Results",
-      description: "Data-driven strategies that deliver tangible business growth."
-    }
-  ];
+import { motion } from "framer-motion";
+import { ArrowRight, Award, Headphones, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 
+const pillars = [
+  {
+    icon: Award,
+    title: "Lab-first craft",
+    description: "We prototype with live data on day one, blending research, brand, and engineering disciplines.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Enterprise guardrails",
+    description: "Security reviews, compliance matrices, and governance rituals come baked into every sprint.",
+  },
+  {
+    icon: Headphones,
+    title: "Embedded partnership",
+    description: "Pods plug into your stack, share Slack channels, and stay on-call until the mission is stable.",
+  },
+];
+
+const rituals = [
+  { label: "Pulse briefings", detail: "Daily async recordings keeping every stakeholder aligned." },
+  { label: "Signal reviews", detail: "Weekly intelligence drops summarizing wins, risks, and live experiments." },
+  { label: "Culture packets", detail: "Playbooks + enablement assets so your team can keep scaling the system." },
+];
+
+const stats = [
+  { value: "10+", label: "Years shipping AI-native work" },
+  { value: "500+", label: "Launches & transformations" },
+  { value: "98%", label: "Retention & renewals" },
+  { value: "24/7", label: "Global support coverage" },
+];
+
+export default function About() {
   return (
-    <div className="bg-white py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              Why Choose <span className="text-pink-500">PropelusAI?</span>
+    <section className="relative overflow-hidden bg-[#05060a] px-6 py-24">
+      <div className="absolute inset-0 opacity-60">
+        <div className="grid-blur absolute inset-0" />
+        <div className="absolute -top-16 left-1/3 h-72 w-72 rounded-full bg-pink-500/20 blur-[140px]" />
+        <div className="absolute bottom-0 right-10 h-96 w-96 rounded-full bg-purple-500/20 blur-[180px]" />
+      </div>
+
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.4em] text-white/70">
+              <Sparkles className="h-4 w-4 text-pink-300" />
+              WHY PROPELUSAI
+            </span>
+            <h2 className="mt-6 text-4xl font-semibold leading-tight md:text-5xl">
+              A studio that behaves like{" "}
+              <span className="bg-gradient-to-r from-pink-400 via-amber-300 to-purple-500 bg-clip-text text-transparent">
+                an embedded lab.
+              </span>
             </h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-10">
-              We understand the unique challenges faced by creators, coaches, solopreneurs, and growing companies. Our mission is to provide trustworthy, results-driven solutions that help you scale with confidence.
+            <p className="mt-4 text-lg text-white/70">
+              We collapse strategy, creative, data, and automation into a single team so you move from idea to launch in
+              weeks—not quarters. Expect deep research, cinematic craft, and the infrastructure to keep scaling.
             </p>
 
-            {/* Features List */}
-            <div className="space-y-6 mb-10">
-              {features.map((feature, index) => {
-                const Icon = feature.icon;
+            <div className="mt-10 space-y-5">
+              {pillars.map((pillar) => {
+                const Icon = pillar.icon;
                 return (
-                  <div 
-                    key={index}
-                    className="group flex items-start gap-4 p-5 rounded-2xl hover:bg-gray-50 transition-all duration-300 cursor-pointer"
+                  <div
+                    key={pillar.title}
+                    className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition hover:border-white/30 hover:bg-white/10"
                   >
-                    <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/30">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 text-white shadow-[0_18px_45px_rgba(255,45,133,0.35)] transition group-hover:scale-105">
+                      <Icon className="h-6 w-6" />
+                    </span>
                     <div>
-                      <h3 className="text-xl font-bold text-black mb-2 group-hover:text-pink-500 transition-colors">
-                        {feature.title}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        {feature.description}
-                      </p>
+                      <p className="text-lg font-semibold text-white">{pillar.title}</p>
+                      <p className="text-sm text-white/70">{pillar.description}</p>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            {/* CTA Button */}
-            <button className="group bg-black text-white px-8 py-4 rounded-full font-semibold hover:bg-pink-500 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2">
-              Learn More About Us
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-            </button>
-          </div>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <button className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-3 text-sm font-semibold shadow-[0_15px_45px_rgba(255,45,133,0.35)] transition hover:translate-y-[-2px]">
+                Meet the studio
+                <ArrowRight className="h-4 w-4" />
+              </button>
+              <button className="rounded-2xl border border-white/20 px-5 py-3 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white">
+                Download credentials
+              </button>
+            </div>
+          </motion.div>
 
-          {/* Right Image Section */}
-          <div className="relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop" 
-                alt="Professional team meeting"
-                className="w-full h-full object-cover"
-              />
-              
-              {/* Overlay Badge */}
-              <div className="absolute bottom-6 left-6 bg-gradient-to-r from-pink-500 to-pink-600 text-white px-8 py-6 rounded-2xl shadow-2xl backdrop-blur-sm">
-                <div className="text-4xl font-black mb-1">500+</div>
-                <div className="text-sm font-semibold opacity-90">Successful Projects</div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-[40px] border border-white/10 bg-gradient-to-br from-white/5 via-black/10 to-transparent p-8 backdrop-blur"
+          >
+            <div className="pointer-events-none absolute inset-0 rounded-[40px] border border-white/5 opacity-30" />
+            <div className="relative space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.4em] text-white/40">Global studio</p>
+                  <p className="text-3xl font-semibold text-white">New York · Dubai · London · Mumbai</p>
+                </div>
+                <UsersRound className="h-10 w-10 text-pink-200" />
               </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute top-6 right-6 w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center">
-                <Award className="w-10 h-10 text-white" />
+              <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                <p className="text-sm uppercase tracking-[0.4em] text-white/40">Rituals</p>
+                <div className="mt-4 space-y-4">
+                  {rituals.map((ritual) => (
+                    <div key={ritual.label} className="flex gap-3">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-pink-400" />
+                      <div>
+                        <p className="text-sm font-semibold text-white">{ritual.label}</p>
+                        <p className="text-sm text-white/60">{ritual.detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <p className="text-sm uppercase tracking-[0.4em] text-white/40">Live programs</p>
+                <div className="mt-4 grid gap-3">
+                  {["Founders intelligence lab", "Commerce velocity hub", "Enterprise automation guild"].map((program) => (
+                    <div key={program} className="flex items-center justify-between text-sm text-white/70">
+                      <span>{program}</span>
+                      <span className="text-pink-300">● Open slots</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Background Decoration */}
-            <div className="absolute -bottom-6 -right-6 w-72 h-72 bg-pink-500/10 rounded-3xl -z-10"></div>
-            <div className="absolute -top-6 -left-6 w-40 h-40 bg-black/5 rounded-3xl -z-10"></div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-          {[
-            { number: "10+", label: "Years Experience" },
-            { number: "500+", label: "Projects Completed" },
-            { number: "98%", label: "Client Satisfaction" },
-            { number: "24/7", label: "Support Available" }
-          ].map((stat, index) => (
-            <div 
-              key={index}
-              className="text-center p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-pink-500 hover:shadow-lg transition-all duration-300 group cursor-pointer"
-            >
-              <div className="text-4xl font-black text-black group-hover:text-pink-500 transition-colors mb-2">
-                {stat.number}
-              </div>
-              <div className="text-gray-600 font-medium">
-                {stat.label}
-              </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid gap-6 md:grid-cols-4"
+        >
+          {stats.map((stat) => (
+            <div key={stat.label} className="rounded-3xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur">
+              <p className="text-4xl font-semibold text-white">{stat.value}</p>
+              <p className="mt-2 text-sm text-white/60">{stat.label}</p>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
-};
+}
 
-export default About;

@@ -1,134 +1,135 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { footerData } from "@/utils/footerData";
+
+const contactLinks = [
+  { label: "hello@propelus.ai", href: "mailto:hello@propelus.ai" },
+  { label: "+1 (415) 555-1034", href: "tel:+14155551034" },
+  { label: "Join the waitlist", href: "/get-started" },
+];
+
+const offices = ["New York", "Dubai", "London", "Mumbai"];
 
 export default function Footer() {
   return (
-    <>
-      {/* Hero Section Above Footer */}
+    <footer className="relative mt-32 overflow-hidden bg-[#05060a] text-white">
+      <div className="pointer-events-none absolute inset-0 opacity-60">
+        <div className="absolute -top-32 left-1/4 h-72 w-72 rounded-full bg-pink-500/20 blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-purple-500/20 blur-[120px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.08),_transparent_65%)]" />
+      </div>
 
-      {/* Footer Section */}
-      <footer className="w-full bg-pink-200 text-[var(--secondary)] pt-20 pb-10 px-6 md:px-20  mt-10">
-        {/* Top Stats Section - (EMPTY IN YOUR CODE SO REMOVED) */}
-        <section className="w-full bg-pink-200 text-[var(--primary)] text-center py-20 px-6 md:px-20">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            {footerData.hero.title}
-          </h2>
-
-          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-[var(--secondary)]">
-            {footerData.hero.subtitle}
-          </p>
-
-          {/* Buttons */}
-          <div className="flex flex-col md:flex-row justify-center gap-6 mb-16">
-            <button className="bg-[var(--primary)] hover:bg-[var(--secondary)] px-8 py-4 rounded-lg font-semibold text-white text-lg">
-              {footerData.hero.primaryBtn}
-            </button>
-
-            <button className="border border-white text-[var(--secondary)] px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-[#0F172A] transition">
-              {footerData.hero.secondaryBtn}
-            </button>
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-16 px-6 py-20">
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-8 md:p-12"
+        >
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-4">
+              <p className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.4em] text-pink-200">
+                <Sparkles className="h-4 w-4" />
+                {footerData.hero.title}
+              </p>
+              <h2 className="text-3xl font-semibold leading-tight text-white md:text-4xl">
+                {footerData.hero.subtitle}
+              </h2>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/get-started"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-4 text-base font-semibold text-white shadow-[0_20px_60px_rgba(255,45,133,0.35)] transition hover:translate-y-[-2px]"
+              >
+                {footerData.hero.primaryBtn}
+                <ArrowUpRight className="h-5 w-5" />
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center rounded-2xl border border-white/20 px-6 py-4 text-base font-semibold text-white/80 transition hover:border-white/40 hover:text-white"
+              >
+                {footerData.hero.secondaryBtn}
+              </Link>
+            </div>
           </div>
 
-          {/* Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            {footerData.hero.stats.map((item, i) => (
-              <div key={i}>
-                <h3 className="text-4xl font-bold text-[var(--secondary)]">
-                  {item.value}
-                </h3>
-                <p className="text-lg text-[var(--primary)]">{item.label}</p>
+          <div className="mt-10 grid grid-cols-2 gap-6 text-center sm:grid-cols-4">
+            {footerData.hero.stats.map((stat) => (
+              <div key={stat.label} className="rounded-2xl border border-white/5 bg-white/5 p-4">
+                <p className="text-3xl font-bold">{stat.value}</p>
+                <p className="text-sm text-white/70">{stat.label}</p>
               </div>
             ))}
           </div>
-        </section>
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Left Section - Logo + Description */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Image
-                src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg"
-                width={40}
-                height={40}
-                alt="logo"
-              />
-              <span className="text-3xl font-bold text-[var(--primary)]">
-                Propelus <span className="text-[var(--secondary)]">AI</span>
-              </span>
+        </motion.section>
+
+        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-5"
+          >
+            <div className="space-y-1">
+              <p className="text-sm uppercase tracking-[0.6em] text-white/50">Propelus</p>
+              <h3 className="text-3xl font-semibold text-white">AI Studio</h3>
             </div>
-
-            <p className="max-w-xs text-[var(--secondary)]">
-              {footerData.description}
-            </p>
-
-            {/* Social Icons */}
-            <div className="flex gap-4 mt-6">
-              {footerData.social.map((soc, i) => (
-                <Link
-                  key={i}
-                  href={soc.href}
-                  className="text-[var(--secondary)] hover:text-[var(--primary)] text-xl"
-                >
-                  {soc.icon === "linkedin" && (
-                    <i className="fab fa-linkedin"></i>
-                  )}
-                  {soc.icon === "twitter" && <i className="fab fa-twitter"></i>}
-                  {soc.icon === "facebook" && (
-                    <i className="fab fa-facebook"></i>
-                  )}
-                </Link>
+            <p className="text-white/70">{footerData.description}</p>
+            <div className="flex flex-wrap gap-2">
+              {offices.map((office) => (
+                <span key={office} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                  {office}
+                </span>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Services Section */}
-          <div>
-            <h3 className="text-xl font-bold text-[var(--primary)] mb-4">
-              Services
-            </h3>
-            <ul className="space-y-2">
-              {footerData.services.map((service, i) => (
-                <li key={i}>
-                  <Link
-                    href="#"
-                    className="hover:text-[var(--primary)] transition"
-                  >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-4"
+          >
+            <h4 className="text-sm uppercase tracking-[0.4em] text-white/50">Navigation</h4>
+            <ul className="space-y-2 text-white/80">
+              {footerData.services.map((service) => (
+                <li key={service}>
+                  <Link href="/services" className="transition hover:text-white">
                     {service}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Company Section */}
-          <div>
-            <h3 className="text-xl font-bold text-[var(--primary)] mb-4">
-              Company
-            </h3>
-            <ul className="space-y-2">
-              {footerData.company.map((item, i) => (
-                <li key={i}>
-                  <Link
-                    href="#"
-                    className="hover:text-[var(--primary)] transition"
-                  >
-                    {item}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-4"
+          >
+            <h4 className="text-sm uppercase tracking-[0.4em] text-white/50">Connect</h4>
+            <ul className="space-y-2 text-white">
+              {contactLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="inline-flex items-center gap-2 text-white/80 transition hover:text-white">
+                    {link.label}
+                    <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t mt-14 pt-6 flex flex-col md:flex-row justify-between text-sm text-[var(--secondary)]">
+        <div className="flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
           <p>{footerData.copyright}</p>
-          <p className="text-[var(--primary)]">{footerData.powered}</p>
+          <p>{footerData.powered}</p>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 }

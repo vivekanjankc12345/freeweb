@@ -1,19 +1,22 @@
 import React from "react";
 import Hero from "../components/Hero.jsx";
+import Highlights from "../components/Highlights.jsx";
 import CoreServices from "../components/CoreServices.jsx";
 import Testimonials from "../components/Testimonials.jsx";
-import Contact from "../components/Contact.jsx";
 import About from "../components/About.jsx";
+import Contact from "../components/Contact.jsx";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-     <CoreServices />
-     <Testimonials />
-     <About />
-     <Contact />
-    </div>
+    <main className="relative flex flex-col gap-0 bg-[var(--background)]">
+      <Hero />
+      <Highlights />
+      <CoreServices />
+      <Testimonials />
+      <About />
+      <Contact />
+    </main>
   );
 };
 
-export default page;
+export default Page;

@@ -1,223 +1,228 @@
 "use client";
-import React, { useState } from 'react';
-import { Calendar, Target, Zap, Phone, Mail, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
 
-const Contact = () => {
-  const [calendlyLink, setCalendlyLink] = useState('');
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Calendar, CheckCircle2, Mail, Phone, Sparkles, Target, Zap } from "lucide-react";
 
-  const features = [
-    {
-      icon: Calendar,
-      title: "Free Consultation",
-      description: "30-minute strategy session",
-      gradient: "from-pink-400 to-pink-600"
-    },
-    {
-      icon: Target,
-      title: "Custom Strategy",
-      description: "Tailored solutions for your needs",
-      gradient: "from-purple-400 to-pink-600"
-    },
-    {
-      icon: Zap,
-      title: "Fast Implementation",
-      description: "Quick turnaround times",
-      gradient: "from-pink-600 to-rose-600"
-    }
-  ];
+const touchpoints = [
+  {
+    icon: Calendar,
+    title: "30-min strategy lab",
+    description: "Co-build your growth thesis with our intelligence leads.",
+    gradient: "from-pink-500/30 to-purple-500/20",
+  },
+  {
+    icon: Target,
+    title: "Bespoke roadmaps",
+    description: "We map prioritised bets and automation candidates in 72h.",
+    gradient: "from-purple-500/30 to-indigo-500/20",
+  },
+  {
+    icon: Zap,
+    title: "Launch in weeks",
+    description: "Pods embed with your team to ship and train simultaneously.",
+    gradient: "from-amber-500/30 to-pink-500/20",
+  },
+];
 
-  const benefits = [
-    "Detailed business analysis",
-    "AI integration opportunities",
-    "Custom roadmap creation",
-    "ROI projections & metrics"
-  ];
+const commitments = [
+  "Deep-dive discovery + opportunity scoring",
+  "AI integration & automation blueprint",
+  "Revenue, retention, and efficiency projections",
+  "Risk, compliance, and data readiness review",
+];
+
+const signalStats = [
+  { label: "Active pods", value: "12" },
+  { label: "Avg. ROI", value: "4.8x" },
+  { label: "Markets served", value: "18" },
+];
+
+export default function Contact() {
+  const [calendlyLink, setCalendlyLink] = useState("");
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+
+  const handleChange = (field) => (event) => {
+    setFormData((prev) => ({ ...prev, [field]: event.target.value }));
+  };
 
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-purple-500/20 to-black"></div>
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-pink-500/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-700"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <section className="relative overflow-hidden bg-[#040308] px-6 py-24">
+      <div className="absolute inset-0 opacity-70">
+        <div className="grid-blur absolute inset-0" />
+        <div className="absolute left-0 top-10 h-80 w-80 rounded-full bg-pink-500/20 blur-[150px]" />
+        <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full bg-purple-500/30 blur-[180px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 py-20">
-        {/* Header Section with Animation */}
-        <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-flex items-center gap-2 bg-pink-500/20 border border-pink-500/30 rounded-full px-6 py-2 mb-6">
-            <Sparkles className="w-5 h-5 text-pink-400 animate-pulse" />
-            <span className="text-pink-300 font-semibold">Limited Slots Available</span>
-          </div>
-          
-          <h2 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Transform</span>
-            <br />Your Business?
-          </h2>
-          <p className="text-gray-300 text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-            Schedule a free consultation with our experts and discover how AI can propel your
-            <span className="text-pink-400 font-semibold"> business to new heights</span>
-          </p>
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-14">
+        <div className="text-center space-y-6">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-2 text-xs uppercase tracking-[0.4em] text-white/70"
+          >
+            <Sparkles className="h-4 w-4 text-pink-300" />
+            BOOK A POD
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl font-semibold leading-tight md:text-6xl"
+          >
+            Build your next release with the{" "}
+            <span className="bg-gradient-to-r from-pink-400 via-amber-300 to-purple-500 bg-clip-text text-transparent">
+              PropelusAI command studio.
+            </span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-3xl text-lg text-white/70"
+          >
+            Share the signal you’re chasing—together we’ll architect an intelligence pod, map the data, and set a launch
+            sprint that fits your team’s rhythm.
+          </motion.p>
         </div>
 
-        {/* Features Grid with Hover Effects */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+        <div className="grid gap-6 md:grid-cols-3">
+          {touchpoints.map((touchpoint, index) => {
+            const Icon = touchpoint.icon;
             return (
-              <div
-                key={index}
-                className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-pink-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20"
+              <motion.div
+                key={touchpoint.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500`}></div>
-                
-                <div className={`relative w-20 h-20 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <Icon className="w-10 h-10 text-white" />
+                <div
+                  className={`pointer-events-none absolute inset-0 rounded-[28px] bg-gradient-to-br ${touchpoint.gradient} opacity-0 transition group-hover:opacity-40`}
+                />
+                <div className="relative flex flex-col gap-4">
+                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-white">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <div>
+                    <p className="text-xl font-semibold text-white">{touchpoint.title}</p>
+                    <p className="text-sm text-white/70">{touchpoint.description}</p>
+                  </div>
                 </div>
-                
-                <h3 className="relative text-2xl font-bold text-white mb-3 group-hover:text-pink-400 transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="relative text-gray-400 text-base group-hover:text-gray-300 transition-colors">
-                  {feature.description}
-                </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
-        {/* Main CTA Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Left: Booking Form */}
-          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-white/10 hover:border-pink-500/30 transition-all duration-300">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-white" />
-              </div>
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-[32px] border border-white/10 bg-gradient-to-br from-white/10 via-black/10 to-transparent p-8 backdrop-blur"
+          >
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 text-white shadow-[0_15px_45px_rgba(255,45,133,0.35)]">
+                <Calendar className="h-5 w-5" />
+              </span>
               <div>
-                <h3 className="text-2xl font-bold text-white">Book Your Meeting</h3>
-                <p className="text-gray-400 text-sm">Choose your preferred time</p>
+                <p className="text-sm uppercase tracking-[0.4em] text-white/40">Book a slot</p>
+                <p className="text-2xl font-semibold text-white">Launch briefing call</p>
               </div>
             </div>
 
-            <div className="space-y-4 mb-6">
+            <div className="mt-8 space-y-4">
               <input
                 type="text"
                 placeholder="Your Name"
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none focus:bg-white/10 transition-all"
+                onChange={handleChange("name")}
+                className="w-full rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-white placeholder-white/40 transition focus:border-pink-400 focus:outline-none"
               />
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder="Work Email"
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none focus:bg-white/10 transition-all"
+                onChange={handleChange("email")}
+                className="w-full rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-white placeholder-white/40 transition focus:border-pink-400 focus:outline-none"
               />
               <input
                 type="tel"
-                placeholder="Phone Number"
+                placeholder="Phone or WhatsApp"
                 value={formData.phone}
-                onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none focus:bg-white/10 transition-all"
+                onChange={handleChange("phone")}
+                className="w-full rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-white placeholder-white/40 transition focus:border-pink-400 focus:outline-none"
               />
             </div>
 
-            <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 border border-pink-500/20 rounded-2xl p-6 mb-6">
-              <div className="flex items-center gap-2 mb-3">
-                <Calendar className="w-5 h-5 text-pink-400" />
-                <span className="text-white font-semibold">Calendly Integration</span>
+            <div className="mt-6 rounded-2xl border border-pink-500/20 bg-pink-500/10 p-5">
+              <div className="flex items-center gap-2 text-sm text-white/70">
+                <Calendar className="h-4 w-4 text-pink-300" />
+                Embed your Calendly link (optional)
               </div>
-              <p className="text-gray-400 text-sm mb-3">
-                Insert your Calendly embed code below
-              </p>
               <input
                 type="text"
-                placeholder="Paste your Calendly link..."
+                placeholder="https://calendly.com/your-team/propelusai"
                 value={calendlyLink}
-                onChange={(e) => setCalendlyLink(e.target.value)}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-pink-500 focus:outline-none text-sm transition-all"
+                onChange={(event) => setCalendlyLink(event.target.value)}
+                className="mt-3 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/40 transition focus:border-pink-400 focus:outline-none"
               />
             </div>
 
-            <button className="group w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 flex items-center justify-center gap-3 hover:scale-105">
-              Schedule Free Consultation
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+            <button className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-4 text-lg font-semibold text-white shadow-[0_20px_50px_rgba(255,45,133,0.35)] transition hover:translate-y-[-2px]">
+              Schedule the lab
+              <ArrowRight className="h-5 w-5" />
             </button>
-          </div>
+          </motion.div>
 
-          {/* Right: Benefits & Contact Options */}
-          <div className="space-y-6">
-            {/* Benefits Card */}
-            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
-              <h4 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-pink-400" />
-                What You'll Get
-              </h4>
-              <div className="space-y-4">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-start gap-3 group hover:translate-x-2 transition-transform">
-                    <CheckCircle className="w-6 h-6 text-pink-400 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
-                    <span className="text-gray-300 text-lg group-hover:text-white transition-colors">{benefit}</span>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <div className="rounded-[32px] border border-white/10 bg-white/5 p-7 backdrop-blur">
+              <p className="text-sm uppercase tracking-[0.4em] text-white/40">What you receive</p>
+              <div className="mt-5 space-y-4">
+                {commitments.map((commitment) => (
+                  <div key={commitment} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-1 h-5 w-5 text-pink-300" />
+                    <p className="text-sm text-white/80">{commitment}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Quick Contact Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <button className="group bg-white text-black px-6 py-4 rounded-2xl font-bold hover:bg-pink-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 hover:shadow-xl">
-                <Phone className="w-5 h-5 group-hover:animate-pulse" />
-                Call Us Now
+            <div className="grid gap-4 md:grid-cols-2">
+              <button className="flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white px-5 py-4 text-sm font-semibold text-black transition hover:-translate-y-0.5 hover:bg-pink-500 hover:text-white">
+                <Phone className="h-4 w-4" />
+                Call our team
               </button>
-              <button className="group bg-gradient-to-r from-pink-500/20 to-purple-500/20 text-white px-6 py-4 rounded-2xl font-bold border border-pink-500/30 hover:border-pink-500 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105">
-                <Mail className="w-5 h-5" />
-                Email Us
+              <button className="flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-transparent px-5 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/40">
+                <Mail className="h-4 w-4" />
+                hello@propelus.ai
               </button>
             </div>
 
-            {/* Stats/Trust Indicators */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="bg-gradient-to-br from-pink-500/20 to-transparent border border-pink-500/30 rounded-2xl p-4 text-center hover:scale-105 transition-transform">
-                <div className="text-3xl font-black text-white mb-1">500+</div>
-                <div className="text-gray-400 text-xs">Projects</div>
-              </div>
-              <div className="bg-gradient-to-br from-purple-500/20 to-transparent border border-purple-500/30 rounded-2xl p-4 text-center hover:scale-105 transition-transform">
-                <div className="text-3xl font-black text-white mb-1">10+</div>
-                <div className="text-gray-400 text-xs">Years Exp</div>
-              </div>
-              <div className="bg-gradient-to-br from-pink-500/20 to-transparent border border-pink-500/30 rounded-2xl p-4 text-center hover:scale-105 transition-transform">
-                <div className="text-3xl font-black text-white mb-1">24/7</div>
-                <div className="text-gray-400 text-xs">Support</div>
-              </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {signalStats.map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-white/10 bg-black/30 p-4 text-center">
+                  <p className="text-3xl font-semibold text-white">{stat.value}</p>
+                  <p className="text-xs uppercase tracking-[0.4em] text-white/40">{stat.label}</p>
+                </div>
+              ))}
             </div>
-          </div>
-        </div>
 
-        {/* Footer */}
-        <div className="text-center">
-          <p className="text-gray-400 text-sm">
-            🌍 Available for clients in <span className="text-pink-400 font-semibold">America, Europe, Middle East, and India</span>
-          </p>
+            <div className="rounded-[28px] border border-white/10 bg-gradient-to-r from-white/5 to-transparent p-6 text-sm text-white/70">
+              🌍 Pods operating across America, Europe, Middle East, India, and APAC. We align to your timezone and
+              security standards.
+            </div>
+          </motion.div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-        .delay-700 { animation-delay: 0.7s; }
-        .delay-1000 { animation-delay: 1s; }
-      `}</style>
-    </div>
+    </section>
   );
-};
+}
 
-export default Contact;

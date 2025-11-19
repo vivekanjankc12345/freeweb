@@ -1,85 +1,105 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+
+const menuItems = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const menuItems = [
-    { id: 1, label: "Home", href: "/" },
-    { id: 2, label: "Services", href: "/services" },
-    { id: 3, label: "About", href: "/about" },
-    { id: 4, label: "Contact", href: "/contact" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="w-full bg-[var(--background)] shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-
-      {/* Logo (Fixed) */}
-      <Link href="/" className="flex items-center gap-2">
-        <div className="flex items-center gap-2">
-          <Image src="https://static.vecteezy.com/system/resources/previews/000/390/524/original/modern-company-logo-design-vector.jpg" width={35} height={35} alt="logo" />
-          <span className="text-2xl font-bold text-[var(--primary)]">
-            Propelus <span className="text-[var(--secondary)]">AI</span>
-          </span>
-        </div>
-      </Link>
-
-      {/* Desktop Menu */}
-      <ul className="hidden md:flex items-center gap-10 text-[var(--secondary)] font-medium">
-        {menuItems.map((item) => (
-          <li key={item.id}>
-            <Link href={item.href} className="hover:text-[var(--primary)]">
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      {/* Desktop Button */}
-      <Link
-        href="/get-started"
-        className="hidden md:block bg-[var(--primary)] text-white px-6 py-2 rounded-lg hover:bg-[var(--secondary)] transition"
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pb-4 pt-6">
+      <motion.nav
+        animate={{
+          opacity: 1,
+          y: scrolled ? 0 : 6,
+          scale: scrolled ? 1 : 0.99,
+        }}
+        transition={{ duration: 0.4 }}
+        className={`w-full max-w-6xl rounded-2xl border border-white/10 bg-black/40 px-4 py-3 backdrop-blur-[18px] shadow-[0_25px_80px_rgba(0,0,0,0.35)] ${
+          scrolled ? "bg-black/60 border-white/15" : ""
+        }`}
       >
-        Get Started
-      </Link>
+        <div className="flex items-center justify-between gap-4">
+          <Link href="/" className="relative inline-flex items-center gap-2 text-white">
+            <span className="text-sm uppercase tracking-[0.6em] text-white/60">Propelus</span>
+            <span className="text-lg font-semibold text-white">AI Studio</span>
+            <span className="absolute inset-0 rounded-full bg-white/5 blur-2xl" aria-hidden />
+          </Link>
 
-      {/* Mobile Hamburger */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="md:hidden block text-[var(--secondary)] focus:outline-none"
-      >
-        {open ? <span className="text-3xl">&times;</span> : <span className="text-3xl">&#9776;</span>}
-      </button>
-
-      {/* Mobile Menu */}
-      {open && (
-        <div className="absolute top-16 left-0 w-full bg-[var(--background)] shadow-md py-4 px-6 md:hidden">
-          <ul className="flex flex-col gap-6 text-[var(--secondary)] text-lg">
+          <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 lg:flex">
             {menuItems.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block hover:text-[var(--primary)]"
-                >
-                  {item.label}
-                </Link>
-              </li>
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-4 py-2 text-sm font-medium text-white/70 transition hover:bg-white/10 hover:text-white"
+              >
+                {item.label}
+              </Link>
             ))}
-          </ul>
+          </div>
 
           <Link
             href="/get-started"
-            onClick={() => setOpen(false)}
-            className="mt-4 block text-center bg-[var(--primary)] text-white px-6 py-2 rounded-lg hover:bg-[var(--secondary)] transition"
+            className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 px-5 py-2 text-sm font-semibold text-white shadow-[0_15px_35px_rgba(255,45,133,0.35)] transition hover:scale-105 lg:flex"
           >
-            Get Started
+            Launch Brief
           </Link>
+
+          <button
+            className="inline-flex items-center justify-center rounded-full border border-white/20 p-2 text-white/80 lg:hidden"
+            onClick={() => setOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-      )}
-    </nav>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-4 flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 lg:hidden"
+            >
+              {menuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-xl px-3 py-3 text-base font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href="/get-started"
+                onClick={() => setOpen(false)}
+                className="mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 px-4 py-3 text-base font-semibold text-white"
+              >
+                Launch Brief
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+    </header>
   );
 }
