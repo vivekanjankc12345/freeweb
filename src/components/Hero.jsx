@@ -23,7 +23,7 @@ export default function Hero() {
         <div className="absolute bottom-0 left-1/3 w-[360px] h-[360px] rounded-full bg-indigo-500/30 blur-[120px]" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-32 flex flex-col gap-16">
+      <div className="relative max-w-6xl mx-auto  px-3 md:px-4.5 lg:px-6 py-12 md:py-18 lg:py-24 flex flex-col gap-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,12 +98,12 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="relative h-[520px] rounded-[36px] bg-gradient-to-br from-neutral-900 via-neutral-900/80 to-slate-900 border border-white/10 backdrop-blur-2xl overflow-hidden"
+              className="relative h-auto  rounded-[36px] bg-gradient-to-br from-neutral-900 via-neutral-900/80 to-slate-900 border border-white/10 backdrop-blur-2xl overflow-hidden"
             >
               <div className="absolute -top-20 right-10 w-48 h-48 bg-pink-500/30 blur-[80px]" />
               <div className="absolute bottom-0 -left-10 w-56 h-56 bg-indigo-500/30 blur-[80px]" />
 
-              <div className="relative h-full p-8 flex flex-col justify-between">
+              <div className="relative h-full p-8 flex flex-col gap-2.5 justify-between">
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div className="text-sm uppercase tracking-[0.4em] text-slate-400">Live Command</div>

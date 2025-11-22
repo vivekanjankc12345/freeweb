@@ -25,7 +25,7 @@ const highlightCards = [
 
 export default function Highlights() {
   return (
-    <section className="relative py-24 px-6">
+    <section className="relative  px-3 md:px-4.5 lg:px-6 py-12 md:py-18 lg:py-24">
       <div className="absolute inset-0 mx-auto max-w-5xl blur-[160px] opacity-40 pointer-events-none">
         <div className="w-full h-full bg-gradient-to-r from-pink-500/40 via-indigo-500/30 to-transparent rounded-full" />
       </div>

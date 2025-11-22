@@ -36,7 +36,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section className="relative overflow-hidden bg-[#05060a] px-6 py-24">
+    <section className="relative overflow-hidden bg-[#05060a] px-3 md:px-4.5 lg:px-6 py-12 md:py-18 lg:py-24">
       <div className="absolute inset-0 opacity-60">
         <div className="grid-blur absolute inset-0" />
         <div className="absolute -top-16 left-1/3 h-72 w-72 rounded-full bg-pink-500/20 blur-[140px]" />
@@ -96,7 +96,7 @@ export default function About() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-[40px] border border-white/10 bg-gradient-to-br from-white/5 via-black/10 to-transparent p-8 backdrop-blur"
+            className="relative overflow-hidden rounded-[40px] border border-white/10 bg-gradient-to-br from-white/5 via-black/10 to-transparent p-4 md:p-5 lg:p-8 backdrop-blur"
           >
             <div className="pointer-events-none absolute inset-0 rounded-[40px] border border-white/5 opacity-30" />
             <div className="relative space-y-6">

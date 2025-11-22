@@ -47,7 +47,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#040308] px-6 py-24">
+    <section className="relative overflow-hidden bg-[#040308]  px-3 md:px-4.5 lg:px-6 py-12 md:py-18 lg:py-24">
       <div className="absolute inset-0 opacity-70">
         <div className="grid-blur absolute inset-0" />
         <div className="absolute left-0 top-10 h-80 w-80 rounded-full bg-pink-500/20 blur-[150px]" />
@@ -121,7 +121,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="rounded-[32px] border border-white/10 bg-gradient-to-br from-white/10 via-black/10 to-transparent p-8 backdrop-blur"
+            className="rounded-[32px] border border-white/10 bg-gradient-to-br from-white/10 via-black/10 to-transparent p-4 md:p-5 lg:p-8 backdrop-blur"
           >
             <div className="flex items-center gap-3">
               <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 text-white shadow-[0_15px_45px_rgba(255,45,133,0.35)]">

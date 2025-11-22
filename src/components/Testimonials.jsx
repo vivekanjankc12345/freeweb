@@ -60,7 +60,7 @@ function StarRating() {
 
 export default function Testimonials() {
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] px-6 py-24">
+    <section className="relative overflow-hidden bg-[var(--background)]  px-3 md:px-4.5 lg:px-6 py-12 md:py-18 lg:py-24">
       <div className="absolute inset-0 opacity-70">
         <div className="grid-blur absolute inset-0" />
         <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-pink-500/20 blur-[120px]" />

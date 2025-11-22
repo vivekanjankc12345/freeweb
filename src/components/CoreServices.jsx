@@ -101,7 +101,7 @@ export default function CoreServices() {
   const [activeTrack, setActiveTrack] = useState(serviceTracks[0]);
 
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] px-6 py-24">
+    <section className="relative overflow-hidden bg-[var(--background)]  px-3 md:px-4.5 lg:px-6 py-12 md:py-18 lg:py-24">
       <div className="absolute inset-0 opacity-60">
         <div className="grid-blur absolute inset-0" />
         <div className="absolute -top-20 right-10 h-72 w-72 rounded-full bg-pink-500/20 blur-[120px]" />
@@ -190,7 +190,7 @@ export default function CoreServices() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.35 }}
-                className="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-white/5 via-black/10 to-white/0 p-8 backdrop-blur"
+                className="relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-white/5 via-black/10 to-white/0 p-4 md:p-5 lg:p-8  backdrop-blur"
               >
                 <div className="pointer-events-none absolute inset-0 rounded-[32px] border border-white/5 opacity-40" />
                 <div className="flex flex-col gap-6">
@@ -240,7 +240,7 @@ export default function CoreServices() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="rounded-[28px] border border-white/10 bg-white/5 p-8 backdrop-blur"
+              className="rounded-[28px] border border-white/10 bg-white/5 p-4 md:p-5 lg:p-8 backdrop-blur"
             >
               <div className="flex items-center gap-3">
                 <ChartSpline className="h-5 w-5 text-pink-300" />
@@ -264,7 +264,7 @@ export default function CoreServices() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="rounded-[28px] border border-white/10 bg-gradient-to-r from-white/5 to-transparent p-8 backdrop-blur"
+              className="rounded-[28px] border border-white/10 bg-gradient-to-r from-white/5 to-transparent p-4 md:p-5 lg:p-8 backdrop-blur"
             >
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-5 w-5 text-emerald-300" />
